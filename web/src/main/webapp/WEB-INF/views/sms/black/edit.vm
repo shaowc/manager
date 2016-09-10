@@ -1,0 +1,24 @@
+
+<div class="pageContent">
+    <form method="post" action="/sms/black/save.htm" class="pageForm" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <input type="hidden" name="id" value="$!request.getParameter('id')">
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <label>手机号：</label>
+                <input type="text" name="mobile" value="$!smsBlackList.mobile" size="30" class="required"/>
+            </div>
+            <div class="unit">
+                <label>拉黑原因：</label>
+                <textarea name="reason" class="required" cols="40" rows="6" >$!smsBlackList.reason</textarea>
+            </div>
+
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>

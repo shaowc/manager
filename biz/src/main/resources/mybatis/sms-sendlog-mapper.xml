@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.familyan.smarth.manager.mapper.sms.SmsSendLogMapper">
+
+    <select id="countByPage" resultType="int">
+        SELECT count(1) FROM SMS_SEND_LOG WHERE 1=1
+        <include refid="findByPageInclude" />
+        ORDER BY id desc
+    </select>
+
+    <select id="findByPage" resultType="smsSendLogVO">
+        SELECT * FROM SMS_SEND_LOG WHERE 1=1
+        <include refid="findByPageInclude" />
+        ORDER BY id desc
+        LIMIT #{pageSize} OFFSET #{offset}
+    </select>
+
+    <sql id="findByPageInclude">
+        <if test="params != null">
+            <if test="params.mobile != null and params.mobile != '' ">
+               AND mobile = #{params.mobile}
+            </if>
+
+            <if test="params.sendTimeStart != null  ">
+                AND gmt_create >= #{params.sendTimeStart}
+            </if>
+
+            <if test="params.sendTimeEnd != null  ">
+                <![CDATA[
+                AND gmt_create <=  #{params.sendTimeEnd}
+                ]]>
+            </if>
+
+        </if>
+    </sql>
+</mapper> 

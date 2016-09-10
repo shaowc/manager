@@ -1,0 +1,67 @@
+
+<div class="pageContent">
+
+    <form method="post" action="/employee/create.htm" class="pageForm" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <label>真实姓名：</label>
+                <input type="text" name="realName" size="30" class="required"/>
+            </div>
+            <div class="unit">
+                <label>花名：</label>
+                <input type="text" name="nickName" size="30"  />
+            </div>
+            <div class="unit">
+                <label>工号：</label>
+                <input type="text" name="empNum" size="30" class="required"/>
+            </div>
+            <div class="unit">
+                <label>密码：</label>
+                <input type="password" name="password" class="required" minlength="6" />
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="unit">
+                <label>性别：</label>
+                <input type="radio" name="gender" value="1"  /> 男
+                <input type="radio" name="gender" value="2"  /> 女
+            </div>
+            <div class="unit">
+                <label>生日：</label>
+                <input type="text" name="birthday" class="date" readonly="true" dateFmt="yyyy-MM-dd" />
+            </div>
+            <div class="unit">
+                <label>邮箱：</label>
+                <input type="text" name="email" class="email" class="required"/>
+            </div>
+            <div class="unit">
+                <label>手机：</label>
+                <input type="text" name="mobile" class="phone" />
+            </div>
+            <div class="unit">
+                <label>详细地址：</label>
+                <input type="text" name="address"  />
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="unit">
+                <label>职位：</label>
+                <input type="text" name="jobTitle"  />
+            </div>
+            <div class="unit">
+                <label>入职时间：</label>
+                <input type="text" name="entryDate" class="date" readonly="true" dateFmt="yyyy-MM-dd"  />
+            </div>
+
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>

@@ -1,0 +1,36 @@
+#macro( printTree $menus ,$root)
+<ul #if($root) class="tree treeFolder treeCheck" #end>
+    #foreach($menu in $menus)
+        #if($menu.show)
+            <li>
+                <a tname="p" tvalue="$menu.id" #if($userPermissions.contains($menu.id))checked="true"#end>$menu.name</a>
+                #if($menu.childrens && $menu.childrens.size() > 0)
+                    #printTree($menu.childrens,false)
+                #end
+            </li>
+        #end
+    #end
+</ul>
+#end
+<div class="pageContent">
+    <form method="post" action="/employee/setPermission.htm" class="pageForm" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <div class="panelBar">
+            <ul class="toolBar">
+            <h1>为员工：$!user.realName ($!user.nickName) 设置权限</h1>
+            </ul>
+        </div>
+        <div class="pageFormContent" layoutH="85">
+
+            <input type="hidden" name="id" value="$!user.id">
+            #printTree($menus,true)
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+                <li>
+                    <div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div>
+                </li>
+            </ul>
+        </div>
+    </form>
+</div>

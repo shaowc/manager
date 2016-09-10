@@ -1,0 +1,23 @@
+<div class="accordion" fillSpace="sidebar">
+    #foreach($menu in $menus)
+        #if($menu.show && $!permissionTool.contains($menu.code))
+        <div class="accordionHeader">
+            <h2><span>Folder</span>$menu.name</h2>
+        </div>
+        <div class="accordionContent">
+            <ul class="tree treeFolder">
+                #foreach($children in $menu.childrens)
+                    #if($children.show && $!permissionTool.contains($children.code))
+                        #if($children.domain && $children.domain != '')
+                            #set($url = "http://" + $children.domain+"/" + ${children.url})
+                        #else
+                            #set($url = ${children.url})
+                        #end
+                        <li><a href="$!url" target="navTab" rel="nav_$!{children.code}">$!{children.name}</a> </li>
+                    #end
+                #end
+            </ul>
+        </div>
+        #end
+    #end
+</div>

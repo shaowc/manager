@@ -1,0 +1,60 @@
+<!-- 在list 页面， form的id 必须为  pagerForm , 才能正常使用 DWZPagination 提供的分页功能 -->
+<form id="pagerForm" method="GET" action="/employee/operations.htm">
+    <input type="hidden" name="pageNum" value="1" />
+    <input type="hidden" name="numPerPage" value="$result.pageSize" />
+    <input type="hidden" name="empNum" value="$!{request.getParameter('empNum')}">
+</form>
+
+<div class="pageHeader">
+    <form onsubmit="return navTabSearch(this);" action="/employee/operations.htm" method="post">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        员工工号: <input type="text" name="empNum" value="$!{request.getParameter('empNum')}" />
+                    </td>
+                </tr>
+            </table>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%" layoutH="110">
+
+        <thead>
+        <tr>
+            <th width="30">ID</th>
+            <th width="50">工号</th>
+            <th width="50">姓名</th>
+            <th width="100">权限code</th>
+            <th width="100">访问IP</th>
+            <th width="100">访问域名</th>
+            <th width="100">URL</th>
+            <th width="100">操作时间</th>
+            <th  >参数</th>
+        </tr>
+        </thead>
+        <tbody>
+            #foreach($operation in $result.result)
+            <tr target="operationId" rel="$operation.id">
+                <td>$operation.id</td>
+                <td>$!operation.empNum</td>
+                <td>$!operation.empName</td>
+                <td>$!operation.code</td>
+                <td>$!operation.ip</td>
+                <td>$!operation.domain</td>
+                <td>$!operation.url</td>
+                <td>#if($operation.gmtCreate)$dateTool.format("yyyy-MM-dd HH:mm:ss",$operation.gmtCreate)#end</td>
+                <td>$!operation.params</td>
+            </tr>
+            #end
+        </tbody>
+    </table>
+
+    #DWZPagination($result.totalItems $result.pageSize $result.page true)
+</div>

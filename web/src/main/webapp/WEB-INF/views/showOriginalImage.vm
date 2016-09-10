@@ -1,0 +1,33 @@
+##显示图片原图组件（弹窗）
+##支持一张或多张图片
+##使用例子：
+##  多张图片：<a href="/showOriginalImage.htm?image=2016041270152,2016041270153,2016041270154" target="dialog" width="1000" height="660" title="订单图片">查 看</a>
+##  一张图片：<a href="/showOriginalImage.htm?image=2016041270152" target="dialog" width="1000" height="660" title="订单图片">查 看</a>
+
+#set ($images = $request.getParameter('image'))
+#if ($images)
+    #set ($imageArray = $images.split(","))
+<div class="pageContent">
+    <form method="post" >
+        <div class="pageFormContent" layoutH="58">
+            #if($imageArray.size() >= 2)
+                #foreach($item in $imageArray)
+                <div class="unit">
+                    <label>第${velocityCount}张：</label>
+                    <label>
+                        <img src="${imgServer}/${item}" />
+                    </label>
+                </div>
+                #end
+            #else
+                <div class="unit">
+                    <label></label>
+                    <label>
+                        <img src="${imgServer}/${imageArray[0]}" />
+                    </label>
+                </div>
+            #end
+        </div>
+    </form>
+</div>
+#end

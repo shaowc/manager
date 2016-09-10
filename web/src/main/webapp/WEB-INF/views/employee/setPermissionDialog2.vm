@@ -1,0 +1,98 @@
+
+<div class="pageHeader">
+    <div>为员工：<b>$!user.realName #if($user.nickName && $user.nickName != "")($!user.nickName) #end </b> 设置权限</div>
+</div>
+
+<div class="pageContent">
+
+    <form method="post" action="/employee/setPermission.htm" class="pageForm" onsubmit="return validateCallback(this, dialogAjaxDone)">
+
+        <div class="">
+            <!-- 右侧菜单 -->
+            <div layoutH="60" style="float:left; display:block; overflow:auto; width:240px; border:solid 1px #CCC; line-height:21px; background:#fff">
+                <ul class="tree treeFolder">
+                    #foreach($channel  in $menus)
+                        #if($channel.show)
+                        <li><a href="javascript" class="unitBox">$channel.name</a>
+                            <ul>
+                                #foreach($menu in $channel.childrens)
+                                    <li><a href="/employee/functions.htm?channelId=$channel.id&menuId=$menu.id&employee=$user.id" target="ajax" rel="jbsxBox">$menu.name</a></li>
+                                #end
+                            </ul>
+                        </li>
+                        #end
+                    #end
+                </ul>
+            </div>
+
+            <div id="jbsxBox" class="unitBox" layouth="60" style="margin-left: 250px; border-left:1px #B8D0D6 solid;">
+                <div>点击右侧菜单选择需要设置的权限</div>
+            </div>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li>
+                    <div class="buttonActive">
+                        <div class="buttonContent">
+                            <button type="submit">提交</button>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="button">
+                        <div class="buttonContent">
+                            <button type="button" class="close">关闭</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </form>
+</div>
+
+##<div class="pageContent" style="padding:5px">
+##
+##        <div layoutH="50" style="float:left; display:block; overflow:auto; width:240px; border:solid 1px #CCC; line-height:21px; background:#fff">
+##            <ul class="tree treeFolder">
+##                #foreach($channel  in $menus)
+##                    #if($channel.show)
+##                    <li><a href="javascript">$channel.name</a>
+##                        <ul>
+##                            #foreach($menu in $channel.childrens)
+##                                <li><a href="/employee/functions.htm?id=$menu.id" target="ajax" rel="jbsxBox">$menu.name</a></li>
+##                            #end
+##                        </ul>
+##                    </li>
+##                    #end
+##                #end
+##            </ul>
+##        </div>
+##
+##        <div id="jbsxBox"  style="margin-left:246px;">
+##            <div class="pageContent" style="border:1px #B8D0D6 solid">
+##                <form method="post" action="/permission/update.htm" class="pageForm" onsubmit="return validateCallback(this, dialogAjaxDone)">
+##                    <div class="pageFormContent nowrap" layoutH="70">
+##                        #set($functions = $menus.get(1).childrens.get(0).childrens)
+##                        #foreach($function in $functions)
+##                            <dl>
+##                                <dt>$function.name <input type="checkbox" name="name"  /> </dt>
+##                                <dd>
+##                                #foreach($func in $function.childrens)
+##                                    <input type="checkbox" name="name"  />$func.name
+##                                #end
+##                                </dd>
+##                            </dl>
+##                            <div class="divider"></div>
+##                        #end
+##                    </div>
+##
+##                </form>
+##            </div>
+##        </div>
+##
+##</div>
+##
+##
+
+
+

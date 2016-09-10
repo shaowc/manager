@@ -1,0 +1,46 @@
+<!-- 在list 页面， form的id 必须为  pagerForm , 才能正常使用 DWZPagination 提供的分页功能 -->
+<form id="pagerForm" method="GET" action="/sms/template/list.htm">
+    <input type="hidden" name="pageNum" value="1" />
+    <input type="hidden" name="numPerPage" value="$result.limit" />
+</form>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="add" href="/sms/template/edit.htm?id=0" target="dialog" width="580" height="440"><span>添加</span></a></li>
+            <!-- li><a class="delete" href="demo/common/ajaxDone.html?uid={sid_user}" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li -->
+            <li><a class="edit" href="/sms/template/edit.htm?id={id}" target="dialog"><span>修改</span></a></li>
+            <li class="line">line</li>
+            <li><a class="icon" href="/sms/template/testSendDialog.htm?id={id}" target="dialog" width="700" height="500"><span>短信发送测试</span></a></li>
+            <!-- li><a class="icon" href="demo/common/dwz-team.xls" target="dwzExport" targetType="navTab" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li -->
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="76">
+        <thead>
+        <tr>
+            <th width="50">ID</th>
+            <th width="200">模板名称</th>
+            <th width="100">短信通道</th>
+            <th width="100">模板内容</th>
+            <th width="50" >操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        #foreach($item in $result.data)
+        <tr target="id" rel="$item.id">
+            <td>$!item.id</td>
+            <td>$!item.name</td>
+            <td>$item.smsChanelDO.name </td>
+            <td>$!item.content</td>
+            <td>
+            #if($item.status == 0)
+                <a href="/sms/template/open.htm?id=$item.id" target="ajaxTodo" title="确认启用?">启用<a>
+            #elseif($item.status == 1)
+                <a href="/sms/template/close.htm?id=$item.id" target="ajaxTodo" title="确认禁用?">禁用</a>
+            #end
+            </td>
+        </tr>
+        #end
+        </tbody>
+    </table>
+    #DWZPagination($result.total $result.limit $result.page true)
+</div>

@@ -1,0 +1,52 @@
+<input type="hidden" name="channelId" value="$!{channelId}">
+<input type="hidden" name="menuId" value="$!{menuId}">
+<input type="hidden" name="employee" value="$!employee">
+
+#foreach($menu in $menus)
+<dl class="stage">
+    <dt>
+        <label>
+            <input type="checkbox" name="p" value="$menu.id" #if($userPermissions.contains($menu.id))checked#end>$menu.name</label>
+    </dt>
+    <dd>
+    #foreach($children in $menu.childrens)
+        <label>
+            <input type="checkbox" name="p" value="$children.id" #if($userPermissions.contains($children.id))checked#end>$children.name</label>
+    #end
+    </dd>
+</dl>
+#end
+
+##<dl class="stage">
+##    <dt>
+##        <label>
+##            <input type="checkbox" name="name">导购管理</label>
+##    </dt>
+##    <dd>
+##        <label>
+##            <input type="checkbox" name="name">查看详情</label>
+##        <label>
+##            <input type="checkbox" name="name">导购修改</label>
+##        <label>
+##            <input type="checkbox" name="name">导购更新</label>
+##        <label>
+##            <input type="checkbox" name="name">导购状态变更</label>
+##    </dd>
+##</dl>
+##
+##<dl class="stage">
+##    <dt>
+##        <label>
+##            <input type="checkbox" name="name">店铺管理</label>
+##    </dt>
+##    <dd>
+##        <label>
+##            <input type="checkbox" name="name">店铺详情</label>
+##        <label>
+##            <input type="checkbox" name="name">修改店铺</label>
+##        <label>
+##            <input type="checkbox" name="name">更新店铺</label>
+##        <label>
+##            <input type="checkbox" name="name">禁用启用店铺</label>
+##    </dd>
+##</dl>

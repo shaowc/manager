@@ -1,0 +1,72 @@
+<!-- 在list 页面， form的id 必须为  pagerForm , 才能正常使用 DWZPagination 提供的分页功能 -->
+<form id="pagerForm" method="GET" action="/sms/log/list.htm">
+    <input type="hidden" name="pageNum" value="1" />
+    <input type="hidden" name="numPerPage" value="$result.pageSize" />
+    <input type="hidden" name="mobile" value="$!{request.getParameter('mobile')}" />
+    <input type="hidden" name="sendTimeStart" value="$!{request.getParameter('sendTimeStart')}"   />
+    <input type="hidden" name="sendTimeEnd" value="$!{request.getParameter('sendTimeEnd')}"  />
+</form>
+<div class="pageHeader">
+    <form onsubmit="return navTabSearch(this);" action="/sms/log/list.htm" method="post">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        手机号: <input type="text" name="mobile" value="$!{request.getParameter('mobile')}" />
+                    </td>
+                    <td>
+                        发送时间: <input type="text" name="sendTimeStart" class="date" readonly="true" dateFmt="yyyy-MM-dd HH:mm:ss" value="$!{request.getParameter('sendTimeStart')}"   /> - <input type="text" name="sendTimeEnd" class="date" readonly="true" dateFmt="yyyy-MM-dd HH:mm:ss" value="$!{request.getParameter('sendTimeEnd')}"  />
+                    </td>
+
+                </tr>
+            </table>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            #*<li><a class="add" href="/sms/log/edit.htm?id=0" target="dialog" width="580" height="440"><span>添加</span></a></li>
+            <!-- li><a class="delete" href="demo/common/ajaxDone.html?uid={sid_user}" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li -->
+            <li><a class="edit" href="/sms/log/edit.htm?id={id}" target="dialog"><span>修改</span></a></li>
+            <li class="line">line</li>*#
+            <!-- li><a class="icon" href="demo/common/dwz-team.xls" target="dwzExport" targetType="navTab" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li -->
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="132">
+        <thead>
+        <tr>
+            <th width="50">ID</th>
+            <th width="100">手机号</th>
+            <th width="50">模板ID</th>
+            <th width="100">短信内容</th>
+            <th width="100">发送时间</th>
+            <th width="100">短信平台</th>
+            <th width="100">通道账号</th>
+            <th width="100">发送状态</th>
+            <th width="50">状态码</th>
+        </tr>
+        </thead>
+        <tbody>
+        #foreach($item in $result.result)
+        <tr target="id" rel="$item.id">
+            <td>$!item.id</td>
+            <td>$!item.mobile</td>
+            <td>$!item.templateId</td>
+            <td>$item.content </td>
+            <td>$dateTool.format($!item.sendTime)</td>
+            <td>#if($item.chanelProvider == 1)上海建周#elseif($item.chanelProvider == 2) 北京亿美 #end</td>
+            <td>$!item.chanelAccount</td>
+            <td>#if($item.status==1)发送成功#elseif($item.status==2) 错误： $item.content #else 调用接口失败 #end</td>
+            <td>$!item.returnValue</td>
+        </tr>
+        #end
+        </tbody>
+    </table>
+    #DWZPagination($result.totalItems $result.pageSize $result.page true)
+</div>

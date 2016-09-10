@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>淘材库后台管理系统</title>
+
+   #parse("include/dwz.vm")
+</head>
+<body scroll="no">
+    <div id="layout">
+        ##头部显示
+        #parse("include/header.vm")
+
+        <div id="leftside">
+            <div id="sidebar_s">
+                <div class="collapse">
+                    <div class="toggleCollapse">
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <div id="sidebar">
+                <div class="toggleCollapse"><h2>主菜单</h2><div>收缩</div></div>
+                ##左侧菜单
+                #parse("channel.vm")
+
+            </div>
+        </div>
+
+        <div id="container">
+            #parse("/main.vm")
+        </div>
+
+    </div>
+
+#parse("include/footer.vm")
+
+</body>
+</html>

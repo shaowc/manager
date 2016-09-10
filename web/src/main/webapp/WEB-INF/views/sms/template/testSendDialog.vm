@@ -1,0 +1,38 @@
+
+<div class="pageContent">
+
+    <form method="post" action="/sms/template/testSend.htm" class="pageForm" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <label>模板名称：</label>
+                <input type="text" name="name" readonly size="30" value="$template.name"/>
+                <input type="hidden" name="id" value="$template.id">
+            </div>
+            <div class="unit">
+                <label>模板内容：</label>
+                <textarea type="text" name="content" readonly rows="5" cols="80" >$template.content</textarea>
+            </div>
+            <div class="unit">
+                <label>输入测试手机号码：</label>
+                <input type="text" name="mobile" size="30" class="required phone"/>
+            </div>
+
+            <div class="divider"></div>
+            <p>以下填入模板中的参数</p>
+            #foreach($field in $fields)
+                <div class="unit">
+                    <label>参数$velocityCount $field：</label>
+                    <input type="text" name="$field" size="30" class=""/>
+                </div>
+            #end
+
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>

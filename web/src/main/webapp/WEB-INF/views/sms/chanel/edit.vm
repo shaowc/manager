@@ -1,0 +1,35 @@
+
+<div class="pageContent">
+    <form method="post" action="/sms/chanel/save.htm" class="pageForm" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <input type="hidden" name="id" value="$!request.getParameter('id')">
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <label>通道名称：</label>
+                <input type="text" name="name" value="$!smsChanel.name" size="30" class="required"/>
+            </div>
+            <div class="unit">
+                <label>短信运营平台：</label>
+                <select name="chanelProvider" class="required">
+                    <option value="1" #if($!smsChanel.chanelProvider==1)selected #end>上海建周</option>
+                    <option value="2" #if($!smsChanel.chanelProvider==2)selected #end>北京亿美</option>
+                </select>
+            </div>
+            <div class="unit">
+                <label>账号：</label>
+                <input type="text" name="account" value="$!smsChanel.account" size="30" class="required"/>
+            </div>
+            <div class="unit">
+                <label>密码：</label>
+                <input type="password" name="password" value="$!smsChanel.password" class="required" minlength="6" />
+            </div>
+
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>

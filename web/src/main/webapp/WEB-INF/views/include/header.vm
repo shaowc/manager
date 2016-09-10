@@ -1,0 +1,28 @@
+<div id="header">
+    <div class="headerNav">
+        <a class="logo" href="javascript:">标志</a>
+        <div class="users">欢迎您！当前用户：$!_emp.name, 工号：$!_emp.empNum</div>
+        <ul class="nav">
+            <li><a href="/index.htm" target="_blank">首页</a></li>
+            <li><a href="/changePwdDialog.htm" target="dialog" rel="userChangePwdDialog" width="400" height="200">修改密码</a></li>
+            <li><a href="/logout.htm">退出</a></li>
+        </ul>
+
+    </div>
+    <!-- navMenu -->
+    <style type="text/css">
+        #header{height:85px}
+        #leftside, #container, #splitBar, #splitBarProxy{top:90px}
+    </style>
+    <div id="navMenu">
+        <ul>
+##            <li #if($currentChannel == 1)class="selected"#end ><a href="/channel/1.htm"><span>基础数据</span></a></li>
+            #foreach($channel in $channels)
+                #if($channel.show && $!permissionTool.contains($channel.code))
+                <li #if($currentChannel == $channel.id)class="selected"#end ><a href="/channel/${channel.id}.htm"><span>$channel.name</span></a></li>
+                #end
+            #end
+##            <li #if($currentChannel == 0)class="selected"#end><a href="/channel/0.htm"><span>系统设置</span></a></li>
+        </ul>
+    </div>
+</div>

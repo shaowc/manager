@@ -1,0 +1,75 @@
+<!-- 在list 页面， form的id 必须为  pagerForm , 才能正常使用 DWZPagination 提供的分页功能 -->
+<form id="pagerForm" method="GET" action="/permission/list.htm">
+    <input type="hidden" name="pageNum" value="1" />
+    <input type="hidden" name="numPerPage" value="$result.limit" />
+</form>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="add" href="/permission/createDialog.htm?type=1" target="dialog" width="650" height="270"><span>创建频道</span></a></li>
+            <!-- li><a class="delete" href="demo/common/ajaxDone.html?uid={sid_user}" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li -->
+            <li><a class="edit" href="/permission/updateDialog.htm?id={pid}" target="dialog" width="700" height="280"><span>修改</span></a></li>
+            <li><a class="icon" href="/permission/showPermissionTree.htm" target="dialog" width="430" height="450"><span>查看权限树</span></a></li>
+            <li class="line">line</li>
+            <!-- li><a class="icon" href="demo/common/dwz-team.xls" target="dwzExport" targetType="navTab" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li -->
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="75">
+        <thead>
+        <tr>
+            <th width="50" align="center">编号</th>
+            <th width="120">名称</th>
+            <th width="150">code(验证权限用)</th>
+            <th width="60">类型</th>
+            <th width="50" align="center">是否显示</th>
+            <th width="100" align="center">所属域名</th>
+            <th width="100">URL</th>
+            <th width="120" align="center">创建时间</th>
+##            <th width="100" align="center">最后修改时间</th>
+            <th width="150">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        #foreach($permission in $result.data)
+        <tr target="pid" rel="$permission.id">
+            <td>$permission.id</td>
+            <td>$!permission.name</td>
+            <td>$!permission.code</td>
+            <td>#if($permission.type == 1)
+                频道
+                #elseif($permission.type == 2)
+                一级菜单
+                #elseif($permission.type == 3)
+                二级菜单
+                #elseif($permission.type == 4)
+                子功能
+                #end</td>
+            <td>#if($permission.show) 是 #else 否 #end</td>
+            <td>$!permission.domain</td>
+            <td>$!permission.url</td>
+            <td>#if($permission.gmtCreate)$dateTool.format("yyyy-MM-dd HH:mm:ss",$permission.gmtCreate)#end</td>
+##            <td>#if($permission.gmtModified)$dateTool.format("yyyy-MM-dd HH:mm:ss",$permission.gmtModified)#end</td>
+            <td>
+                #if($permission.type == 1)
+                    <a   href="/permission/createDialog.htm?type=2&id=$permission.id" target="dialog" width="650" height="270"><span>创建一级菜单</span></a>
+                #elseif($permission.type == 2)
+                    <a   href="/permission/createDialog.htm?type=3&id=$permission.id" target="dialog" width="650" height="270"><span>创建二级菜单</span></a>
+                #elseif($permission.type == 3)
+                    <a  href="/permission/createDialog.htm?type=4&id=$permission.id" target="dialog" width="650" height="270"><span>创建子功能</span></a>
+                #end
+                #if($permission.show)
+                    | <a href="/permission/show.htm?id=$permission.id&show=0" target="ajaxTodo" title="确定关闭该菜单吗?"><span>关闭</span></a>
+                #else
+                    | <a href="/permission/show.htm?id=$permission.id&show=1" target="ajaxTodo" title="启用该菜单?"><span>启用</span></a>
+                #end
+                #if(!$permission.base )
+                   | <a href="/permission/remove.htm?id=$permission.id" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a>
+                #end
+            </td>
+        </tr>
+        #end
+        </tbody>
+    </table>
+    #DWZPagination($result.total $result.limit $result.page true)
+</div>

@@ -1,0 +1,64 @@
+
+<div class="pageContent">
+
+    <form method="post" action="/employee/update.htm" class="pageForm" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <div class="pageFormContent" layoutH="58">
+            <input name="id" type="hidden" value="$!employee.id">
+            <div class="unit">
+                <label>真实姓名：</label>
+                <input type="text" name="realName" size="30" value="$!employee.realName" class="required"/>
+            </div>
+            <div class="unit">
+                <label>花名：</label>
+                <input type="text" name="nickName" size="30" value="$!employee.nickName" />
+            </div>
+            <div class="unit">
+                <label>工号：</label>
+                <input type="text" name="empNum" size="30" class="required" value="$!employee.empNum"/>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="unit">
+                <label>性别：</label>
+                <input type="radio" name="gender" value="1" #if($!employee.gender) checked #end  /> 男
+                <input type="radio" name="gender" value="2" #if($!employee.gender) checked #end /> 女
+            </div>
+            <div class="unit">
+                <label>生日：</label>
+                <input type="text" name="birthday" class="date" readonly="true" dateFmt="yyyy-MM-dd" value="$!employee.birthday"/>
+            </div>
+            <div class="unit">
+                <label>邮箱：</label>
+                <input type="text" name="email" class="email" class="required" value="$!employee.email"/>
+            </div>
+            <div class="unit">
+                <label>手机：</label>
+                <input type="text" name="mobile" class="phone" value="$!employee.mobile" />
+            </div>
+            <div class="unit">
+                <label>详细地址：</label>
+                <input type="text" name="address"  value="$!employee.address" />
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="unit">
+                <label>职位：</label>
+                <input type="text" name="jobTitle" value="$!employee.jobTitle" />
+            </div>
+            <div class="unit">
+                <label>入职时间：</label>
+                <input type="text" name="entryDate" class="date" readonly="true" dateFmt="yyyy-MM-dd" value="#if($!employee.entryDate)$dateTool.format('yyyy-MM-dd',$!employee.entryDate)#end"  />
+            </div>
+
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>

@@ -1,0 +1,32 @@
+
+<div class="pageContent">
+    <form method="post" action="/sms/template/save.htm" class="pageForm" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <input type="hidden" name="id" value="$!request.getParameter('id')">
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <label>模板名称：</label>
+                <input type="text" name="name" value="$!smsTemplate.name" size="30" class="required"/>
+            </div>
+            <div class="unit">
+                <label>短信通道：</label>
+                <select name="chanelId" class="required">
+                    #foreach($smsChanel in $smsChanels)
+                        <option value="$smsChanel.id" #if($!smsTemplate.chanelId==$smsChanel.id)selected #end>$!smsChanel.name</option>
+                    #end
+                </select>
+            </div>
+            <div class="unit">
+                <label>模板内容：</label>
+                <textarea name="content" class="required" cols="40" rows="6" >$!smsTemplate.content</textarea>
+            </div>
+
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>

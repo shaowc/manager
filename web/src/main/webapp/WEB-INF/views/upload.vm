@@ -1,0 +1,1 @@
+#if($json.success){"success":true,"filename":"${json.data['filename']}","len":${json.data['len']}}#else{"success":false,"message":"${json.message}"}#end

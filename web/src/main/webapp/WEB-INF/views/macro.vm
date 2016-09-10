@@ -1,0 +1,40 @@
+#macro( DWZPagination $totalCount $numPerPage $currentPage $isNavTab)
+<!-- $totalCount $numPerPage $currentPage -->
+    #if(!$totalCount)
+        #set($totalCount = 0)
+    #end
+    #if(!$numPerPage)
+        #set($numPerPage = 20)
+    #end
+    #if($currentPage <= 0)
+        #set($currentPage = 1)
+    #end
+<div class="panelBar">
+    <div class="pages">
+        <span>显示</span>
+        <select name="numPerPage" onchange="#if($isNavTab) navTabPageBreak({numPerPage:this.value}) #else dialogPageBreak({numPerPage:this.value}) #end">
+            <option value="20" #if($numPerPage == 20) selected="selected" #end>20</option>
+            <option value="50" #if($numPerPage == 50) selected="selected"  #end>50</option>
+            <option value="100" #if($numPerPage == 100) selected="selected"  #end>100</option>
+            <option value="200" #if($numPerPage == 200) selected="selected"  #end>200</option>
+        </select>
+        <span>条，共${totalCount}条</span>
+##        <span>共有${totalCount}条记录， 每页显示${numPerPage}条记录</span>
+    </div>
+    <div class="pagination" #if($isNavTab)targetType="navTab" #else targetType="dialog" #end totalCount="${totalCount}" numPerPage="$numPerPage" pageNumShown="10" currentPage="$currentPage"></div>
+</div>
+#end
+
+## 显示金额
+## 示例
+## #currency(101) -> ￥1.01  #currency(101 ,'#') -> 1
+## #currency(0) -> ￥0.00
+## #currency(101) -> ￥1.01
+## #currency(101 ,'#') -> 1
+## #currency(101 ,'#.#') -> 1.0
+## #currency(101 ,'#.##') -> 1.01
+## 注意格式参数用 单引号
+#macro( currency $value,$format)#if($value )#set($r = $value / 100.00)#if($format)$numberTool.format($format,$r)#else $numberTool.currency($r) #end#else 0#end#end
+
+##直接输出
+#macro ( direct $direct-output )$!direct-output#end

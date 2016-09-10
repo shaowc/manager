@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<toolbox>
+  <xhtml>true</xhtml>
+
+   <tool>
+     <key>permissionTool</key>
+     <scope>request</scope>
+     <class>com.familyan.smarth.manager.security.PermissionTool</class>
+   </tool>
+
+    <tool>
+        <key>toolkit</key>
+        <scope>application</scope>
+        <class>com.taocaiku.manager.util.Toolkit</class>
+    </tool>
+
+    <tool>
+        <key>stringUtils</key>
+        <scope>application</scope>
+        <class>org.apache.commons.lang.StringUtils</class>
+    </tool>
+
+    <tool>
+        <key>dateFormatUtils</key>
+        <scope>application</scope>
+        <class>org.apache.commons.lang.time.DateFormatUtils</class>
+    </tool>
+
+</toolbox>

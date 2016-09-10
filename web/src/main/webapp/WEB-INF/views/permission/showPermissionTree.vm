@@ -1,0 +1,24 @@
+#macro( printPermissionTree $menus ,$root)
+<ul #if($root) class="tree" #end>
+    #foreach($menu in $menus)
+        <li>
+            <a>$menu.name#if(!$menu.show)(未启用)#end</a>
+            #if($menu.childrens && $menu.childrens.size() > 0)
+                #printPermissionTree($menu.childrens,false)
+            #end
+        </li>
+    #end
+</ul>
+#end
+<div class="pageContent">
+    <div class="pageFormContent" layoutH="56">
+        #printPermissionTree($menus,true)
+    </div>
+    <div class="formBar">
+        <ul>
+            <li>
+                <div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div>
+            </li>
+        </ul>
+    </div>
+</div>

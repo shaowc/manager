@@ -1,0 +1,58 @@
+<!-- 在list 页面， form的id 必须为  pagerForm , 才能正常使用 DWZPagination 提供的分页功能 -->
+<form id="pagerForm" method="GET" action="/employee/list.htm">
+    <input type="hidden" name="pageNum" value="1" />
+    <input type="hidden" name="numPerPage" value="$result.limit" />
+</form>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="add" href="/employee/createDialog.htm" target="dialog" width="580" height="440"><span>添加</span></a></li>
+            <!-- li><a class="delete" href="demo/common/ajaxDone.html?uid={sid_user}" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li -->
+            <li><a class="edit" href="/employee/updateDialog.htm?id={empId}" target="dialog"><span>修改</span></a></li>
+            <li class="line">line</li>
+##            <li><a class="icon" href="/employee/setPermissionDialog.htm?id={empId}" target="dialog" width="430" height="430"><span>设置权限</span></a></li>
+            <li><a class="icon" href="/employee/setPermissionDialog2.htm?id={empId}" target="dialog" width="960" height="540"><span>设置权限</span></a></li>
+            <!-- li><a class="icon" href="demo/common/dwz-team.xls" target="dwzExport" targetType="navTab" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li -->
+        </ul>
+        
+    </div>
+    <table class="table" width="100%" layoutH="75">
+        <thead>
+        <tr>
+            <th width="50">编号</th>
+            <th width="100">工号</th>
+            <th width="100">真实姓名</th>
+            <th width="100">花名</th>
+            <th width="100">职位</th>
+            <th width="100" align="center">入职时间</th>
+            <th width="100">手机</th>
+            <th width="100">邮箱</th>
+            <th width="50">在职状态</th>
+            <th width="50" >操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        #foreach($emp in $result.data)
+        <tr target="empId" rel="$emp.id">
+            <td>$emp.id</td>
+            <td>$!emp.empNum</td>
+            <td>$!emp.realName</td>
+            <td>$!emp.nickName</td>
+            <td>$!emp.jobTitle</td>
+            <td>#if($emp.entryDate)$dateTool.format("yyyy-MM-dd",$emp.entryDate)#end</td>
+            <td>$!emp.mobile</td>
+            <td>$!emp.email</td>
+            <td>#if($emp.status == 1)在职#else 离职 #end</td>
+            <td>
+            #if($emp.status == 1)
+            <a href="/employee/dimission.htm?id=$emp.id" target="ajaxTodo" title="确认离职?">离职</a>
+            #end
+            </td>
+        </tr>
+        #end
+        </tbody>
+    </table>
+
+    #DWZPagination($result.total $result.limit $result.page true)
+</div>
