@@ -1,0 +1,56 @@
+<form id="pagerForm" method="GET" action="/lookup/checkers.htm">
+    <input type="hidden" name="pageNum" value="$result.currentPage" />
+    <input type="hidden" name="numPerPage" value="$result.limit" />
+    <input type="hidden" name="name" value="$!{request.getParameter('name')}" />
+    <input type="hidden" name="mobile" value="$!{request.getParameter('mobile')}" />
+</form>
+<div class="pageHeader">
+    <form rel="pagerForm" method="GET" action="/lookup/checkers.htm" onsubmit="return dwzSearch(this, 'dialog');">
+        <input type="hidden" name="numPerPage" value="$result.limit" />
+        <div class="searchBar">
+            <ul class="searchContent">
+                <li>
+                    <label>快检手名字:</label>
+                    <input class="textInput" name="name" value="$!{request.getParameter('name')}" type="text">
+                </li>
+                <li>
+                    <label>快检手手机号:</label>
+                    <input class="textInput" name="name" value="$!{request.getParameter('name')}" type="text">
+                </li>
+            </ul>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                    <li><div class="button"><div class="buttonContent"><button type="button" multLookup="item" warn="请选择类目">确认</button></div></div></li>
+                    <li><div class="button"><div class="buttonContent"><button type="button" onclick="javascript:$.bringBack({name:'', memberId:''})" >清除</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <table class="table" layoutH="118" targetType="dialog" width="100%">
+        <thead>
+            <tr>
+                <th width="30"></th>
+                <th width="30">id</th>
+                <th width="200">快检手名字</th>
+                <th width="200">快检手手机号</th>
+            </tr>
+        </thead>
+        <tbody>
+            #foreach($item in $result.data)
+            <tr ondblclick="javascript:$.bringBack({name:'$item.name', memberId:'$item.memberId'})">
+                <td><input type="radio" name="item" value="{name:'$item.name', memberId:'$item.memberId'}"/></td>
+                <td>$!item.id</td>
+                <td>$!item.name</td>
+                <td>$!item.mobile</td>
+            </tr>
+            #end
+        </tbody>
+    </table>
+
+    #DWZPagination($result.total $result.limit $result.currentPage false)
+</div>
+

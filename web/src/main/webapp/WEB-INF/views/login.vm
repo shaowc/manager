@@ -12,10 +12,10 @@
 <div id="login">
     <div id="login_header">
         <h1 class="login_logo">
-            <a href="javascript:"><img src="$staticServer.get('themes/default/images/tck-login-logo.png')" /></a>
+            <div style="float: left;color:black;font-weight:bold; height:30px;line-height:30px;padding:10px 0px;margin-left:20px; font-size: 30px;">小马快检后台管理系统</div>
         </h1>
         <div class="login_headerContent">
-            <h2 class="login_title"><img src="$staticServer.get('themes/default/images/tck-logo-title.png')" /></h2>
+            <div style="width:100%; text-align center;color:black;font-weight:bold; height:30px;line-height:30px;padding:10px 0px;margin-left:20px; font-size: 18px;">小马快检后台管理系统</div>
         </div>
     </div>
     <div id="login_content">

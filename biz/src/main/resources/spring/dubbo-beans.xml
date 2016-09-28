@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-       <dubbo:application name="manager" owner="yyc" />
+       <dubbo:application name="manager" owner="swc" />
 
        <dubbo:registry address="${dubbo.registry}" check="false"/>
 
@@ -12,5 +12,8 @@
        <dubbo:provider timeout="2000" retries="0"  />
   
        <dubbo:annotation package="com.familyan.smarth.manager.service" />
+
+       <dubbo:reference id="packetService" interface="com.familyan.smarth.service.PacketService" lazy="true" check="false" />
+       <dubbo:reference id="checkerService" interface="com.familyan.smarth.service.CheckerService" lazy="true" check="false" />
 
 </beans>

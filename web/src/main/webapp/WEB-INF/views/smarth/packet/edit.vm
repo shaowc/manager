@@ -1,0 +1,79 @@
+
+<div class="pageContent">
+    <form method="post" action="/packet/save.htm" class="pageForm" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <input type="hidden" name="id" value="$!request.getParameter('id')">
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <label>体检包名称：</label>
+                <input type="text" name="name" value="$!packet.name" size="30" class="required"/>
+            </div>
+            <div class="unit">
+                <label>体检包描述：</label>
+                <textarea name="description" class="required" cols="29">$!packet.description</textarea>
+            </div>
+            <div class="unit">
+                <label>体检包价格：</label>
+                <input type="text" name="packetPrice" value="#currency($packet.price, '#.##')" size="30" class="required number">
+            </div>
+            #if($contents)
+                #foreach($content in $contents)
+                    <div class="unit">
+                        <label>体检项目：</label>
+                        <input type="text" name="content" value="$content" size="30" class="required"/>
+                        <input type="button" value="+" class="addContentBtn" style="margin-left: 10px;cursor: pointer;" />
+                        #if($velocityCount > 1)
+                            <input type="button" value="-" class="removeContentBtn" style="margin-left: 10px;cursor: pointer;"/>
+                        #end
+
+                    </div>
+                #end
+            #else
+            <div class="unit">
+                <label>体检项目：</label>
+                <input type="text" name="content" value="" size="30" class="required"/>
+                <input type="button" value="+" class="addContentBtn" style="margin-left: 10px;cursor: pointer;" />
+            </div>
+            #end
+
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>
+
+
+<div style="visibility: hidden;">
+    <div id="contentTemplate" class="unit">
+        <label>体检项目：</label>
+        <input type="text" name="content" value=""  size="30" class="required"/>
+        <input type="button" value="+" class="addContentBtn" style="margin-left: 10px;cursor: pointer;" />
+        <input type="button" value="-" class="removeContentBtn" style="margin-left: 10px;cursor: pointer;"/>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function addContent() {
+        var temp = $("#contentTemplate").clone();
+        temp.attr("id","");
+        $(this).parent().after(temp);
+        // 注册事件
+        $(".addContentBtn", temp).click(addContent);
+        $(".removeContentBtn", temp).click(removeContent);
+    }
+
+    function removeContent() {
+        $(this).parent().remove();
+    }
+
+    $(function(){
+        $(".addContentBtn").click(addContent);
+        $(".removeContentBtn").click(removeContent);
+    });
+
+</script>

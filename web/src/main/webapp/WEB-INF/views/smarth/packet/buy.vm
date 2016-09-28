@@ -1,0 +1,46 @@
+
+<div class="pageContent">
+    <form method="post" action="/packet/tobuy.htm" class="pageForm" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <input type="hidden" name="packetId" value="$!request.getParameter('id')">
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <label>体检包名称：</label>
+                <input type="text" value="$!packet.name" size="30" disabled/>
+            </div>
+            <div class="unit">
+                <label>体检包描述：</label>
+                <textarea disabled >$!packet.description</textarea>
+            </div>
+            <div class="unit">
+                <label>体检包价格：</label>
+                <input type="text" value="#currency($packet.price, '#.##')" size="30" disabled>
+            </div>
+            #foreach($content in $contents)
+                <div class="unit">
+                    <label>体检项目：</label>
+                    <input type="text" value="$content" size="30" disabled class="required"/>
+                </div>
+            #end
+            <div class="unit">
+                <label>选择快检手：</label>
+                <input type="hidden" name="memberId">
+                <input type="text" name="name" value="" class="required">
+                <a class="btnLook" href="/lookup/checkers.htm" lookupGroup="" rel="checkersLookupDialog">选择快检手</a>
+            </div>
+
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>
+
+
+<script type="text/javascript">
+
+
+</script>

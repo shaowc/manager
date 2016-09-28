@@ -42,5 +42,5 @@
         #end
         </tbody>
     </table>
-    #DWZPagination($result.total $result.limit $result.page true)
+    #DWZPagination($result.total $result.limit $result.currentPage true)
 </div>

@@ -1,6 +1,7 @@
 <div id="header">
     <div class="headerNav">
-        <a class="logo" href="javascript:">标志</a>
+##        <a class="logo" href="javascript:">标志</a>
+        <div style="float: left;color:#b9ccda;height:30px;line-height:30px;padding:10px 0px;margin-left:20px; font-size: large;">小马快检后台管理系统</div>
         <div class="users">欢迎您！当前用户：$!_emp.name, 工号：$!_emp.empNum</div>
         <ul class="nav">
             <li><a href="/index.htm" target="_blank">首页</a></li>
